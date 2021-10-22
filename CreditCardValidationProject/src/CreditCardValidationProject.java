@@ -2,10 +2,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class CreditCardValidationProject
 	{
-		//an L on the end tells the computer it is a Long
 		static long creditCardTest;
 		static long creditCardTest1;
 		static long [] ccArray = new long[16];
@@ -13,26 +11,26 @@ public class CreditCardValidationProject
 		static long doubleDigit1;
 		static long doubleDigit2;
 		static long ccSum;
+		static int counter = 0;
 		
-		
-		//digit strip each number and put it into an int array
 		public static void main(String[] args) throws IOException
 			{
-				Scanner myFile = new Scanner(new File("credit.txt"));
+				Scanner myFile = new Scanner(new File("realcredit.txt"));
 				
 				//while it goes through each token
 				while(myFile.hasNext()) 
 					{
+						//this initializes the number as the next token
 						creditCardTest = myFile.nextLong();
-						creditCardTest1 = myFile.nextLong();
+						//^^taking the original number to print out at the very end 
+						//below i created a new one (that had the same digits) that I can manipulate
+						creditCardTest1 = creditCardTest;
 						intoArray();
-						//printArray();
 						takeAltNums();
-						//printAfterAlt();
 						addDoubleDigits();
-						//printAfterDD();
 						sumAllDigits();
 					}
+				System.out.println("\n\nThe number of potential valid credit cards: " + counter);
 			}
 	
 		public static void intoArray()
@@ -45,14 +43,7 @@ public class CreditCardValidationProject
 						creditCardTest1 = creditCardTest1 / 10;
 					}
 			}
-		public static void printArray()
-		{
-			System.out.println("Your array is: ");
-			for(int i = 0; i < ccArray.length; i++)
-				{
-					System.out.print(ccArray[i] + " ");
-				}
-		}
+
 		public static void takeAltNums()
 		{
 			for(int i = 0; i < ccArray.length; i+=2)
@@ -60,14 +51,7 @@ public class CreditCardValidationProject
 					ccArray[i] = ccArray[i] * 2;
 				}
 		}
-		public static void printAfterAlt()
-		{
-			System.out.println("\n\nYour new array is: ");
-			for(int i = 0; i < ccArray.length; i++)
-				{
-					System.out.print(ccArray[i] + " ");
-				}
-		}
+
 		public static void addDoubleDigits()
 		{
 			for(int i = 0; i < ccArray.length; i++)
@@ -81,14 +65,7 @@ public class CreditCardValidationProject
 						}
 				}
 		}
-		public static void printAfterDD()
-		{
-			System.out.println("\n\nYour new array is: ");
-			for(int i = 0; i < ccArray.length; i++)
-				{
-					System.out.print(ccArray[i] + " ");
-				}
-		}
+
 		public static void sumAllDigits()
 		{
 			ccSum = 0;
@@ -96,26 +73,18 @@ public class CreditCardValidationProject
 				{
 					ccSum = ccSum + ccArray[i]; 
 				}
-			System.out.println("\n\nThe sum is: " + ccSum);
 			
 			if(ccSum % 10 == 0)
 				{
 					System.out.println("The credit card number " + creditCardTest + " is potentially valid.");
+					counter++;
 				}
 			else
 				{
-					System.out.println("The credit card number " + creditCardTest + "is not valid.");
+					System.out.println("The credit card number " + creditCardTest + " is invalid.");
 				}
 				
 			
 		}
-		
-		//practice it first with a valid: 
-				//5424 1801 2345 6789
-				//change 1 digit and test it then 
-				//after that, import the file
-
-				//import text file, split each line, strip spaces, and put each number into array
-				
 
 	}
