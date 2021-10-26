@@ -31,6 +31,7 @@ public class CreditCardValidationProject
 						sumAllDigits();
 					}
 				System.out.println("\n\nThe number of potential valid credit cards: " + counter);
+				System.out.println("This is a comment to practice branching");
 			}
 	
 		public static void intoArray()
